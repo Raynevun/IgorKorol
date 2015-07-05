@@ -11,7 +11,7 @@ response = urlopen(url)
 resp_body = response.read()
 
 code_actual = response.getcode()
-code_expected = 201
+code_expected = 200
 if code_actual == code_expected:
     value = parseString(resp_body).getElementsByTagName('outputValue')[0].firstChild.data
     print(value)

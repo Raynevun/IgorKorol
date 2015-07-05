@@ -1,6 +1,6 @@
 from urllib.request import urlopen
 from xml.dom.minidom import parseString
-from lib import StringUtils
+import collections
 
 url = 'https://beacon.nist.gov/rest/record/last'
 ERROR_BEACON_API_MSG = "Error: Unable calculate char sequence because Beacon API issue\n  " \
@@ -18,10 +18,14 @@ if code_actual == code_expected:
     print("Beacon 'last' value :\n{0}".format(value))
 
     # calculate char sequense from Beacon HEX value represented as string
-    results = StringUtils.calculate_char_sequence(value)
+    results = collections.defaultdict(int)
+    for c in value:
+        results[c] += 1
 
     # print result as 'character, sequense'
-    StringUtils.print_collection(results)
+    print("Char sequence in beacon value :\n")
+    for k in results.keys():
+        print(k, ',', results[k])
 else:
     print(ERROR_BEACON_API_MSG.format(code_actual, code_expected, resp_body))
 

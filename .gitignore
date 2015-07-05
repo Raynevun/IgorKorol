@@ -4,3 +4,4 @@ beacon.egg-info/
 build/
 dist/
 sdist/
+.idea
